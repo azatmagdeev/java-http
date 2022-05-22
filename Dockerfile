@@ -6,6 +6,8 @@ RUN mvn package -B
 FROM openjdk:17.0.2-slim-bullseye
 COPY --from=build /app/target/app.jar .
 
+CMD ["java", "-jar", "/app/app.jar"]
+
 # WORKDIR /app
 # COPY package.json package-lock.json ./
 # RUN npm ci
