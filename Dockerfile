@@ -4,6 +4,7 @@ COPY . .
 RUN mvn package -B
 
 FROM openjdk:17.0.2-slim-bullseye
+WORKDIR /app
 COPY --from=build /app/target/app.jar .
 
 CMD ["java", "-jar", "/app/app.jar"]
