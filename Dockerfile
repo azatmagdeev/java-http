@@ -7,7 +7,7 @@ FROM openjdk:17.0.2-slim-bullseye
 WORKDIR /app
 COPY --from=build /app/target/app.jar .
 
-CMD ["java", "-jar", "/app/app.jar"]
+CMD ["java", "-cp", "/app/app.jar", "org.example.Main"]
 
 # WORKDIR /app
 # COPY package.json package-lock.json ./
