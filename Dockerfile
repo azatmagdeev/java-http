@@ -1,13 +1,10 @@
 FROM maven:3.8.5-eclipse-temurin-17 as build
 WORKDIR /app
-COPY . .
-RUN mvn package -B
 
-FROM openjdk:17.0.2-slim-bullseye
-WORKDIR /app
-COPY --from=build /app/target/app.jar .
+COPY docker-entrypoint.sh /usr/local/bin
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-CMD ["java", "-cp", "/app/app.jar", "org.example.Main"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # WORKDIR /app
 # COPY package.json package-lock.json ./
